@@ -14,4 +14,4 @@ link:
 	npm link
 
 unlink:
-	npm unlink
+	npm rm --global @hexlet/code
