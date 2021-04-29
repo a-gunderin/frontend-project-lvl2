@@ -1,2 +1,20 @@
-### Hexlet tests and linter status:
+# Gendiff - generator of difference
 [![Actions Status](https://github.com/a-gunderin/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/a-gunderin/frontend-project-lvl2/actions)
+
+Gendiff (generator of difference) is program that determines the difference between two data structures. 
+
+Utility features:
+
+* Support for different input formats: yaml, json
+* Generating of report in plain text, stylish and json format
+
+## Requirements
+
+I am developing this program using v14.14.0 of Node.
+If you face with some issue while using other version of node just try to use v14.14.0.
+
+## Setup for Linux / macOS systems
+
+```sh
+$ make install
+```
