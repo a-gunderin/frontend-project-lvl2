@@ -1,5 +1,6 @@
 install:
 	npm ci
+	npm link
 
 publish:
 	npm publish --dry-run
@@ -10,8 +11,5 @@ lint:
 lint-fix:
 	npx eslint --fix .
 
-link:
-	npm link
-
-unlink:
+uninstall:
 	npm rm --global @hexlet/code
