@@ -18,3 +18,35 @@ If you face with some issue while using other version of node just try to use v1
 ```sh
 $ make install
 ```
+
+## Setup for Windows
+
+```sh
+$ npm ci
+...
+$ npm link
+```
+
+## Get help information on Linux / macOS
+
+```sh
+$ gendiff -h
+```
+
+## Get help information on Windows
+
+```sh
+$ ../frontend-project-lvl2> node ./bin/gendiff -h
+```
+
+### Compare two files on Linux / macOS
+
+```sh
+$ gendiff pathToFile1.json pathToFile2.json
+```
+
+### Compare two files on Windows
+
+```sh
+$ ../frontend-project-lvl2> node ./bin/gendiff pathToFile1.json pathToFile2.json
+```
