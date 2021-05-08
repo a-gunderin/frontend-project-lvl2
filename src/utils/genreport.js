@@ -3,7 +3,6 @@ import getFilesData from './getfilesdata.js';
 
 const genReport = (filepath1, filepath2) => {
   const filesData = getFilesData(filepath1, filepath2);
-
   if (filesData) {
     const keys = Object.keys(filesData[0]).concat(Object.keys(filesData[1]));
     const sortedKeys = _.uniq(keys)
@@ -28,7 +27,6 @@ const genReport = (filepath1, filepath2) => {
     });
     console.log(`{\n  ${result.join('\n  ')}\n}`);
   }
-
   return null;
 };
 
