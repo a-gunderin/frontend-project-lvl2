@@ -1,5 +1,7 @@
 # Gendiff - generator of difference
 [![Actions Status](https://github.com/a-gunderin/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/a-gunderin/frontend-project-lvl2/actions)
+[![ESLint](https://github.com/a-gunderin/frontend-project-lvl2/actions/workflows/linter.yml/badge.svg)](https://github.com/a-gunderin/frontend-project-lvl2/actions/workflows/linter.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/03f3aac295ca599f1c70/maintainability)](https://codeclimate.com/github/a-gunderin/frontend-project-lvl2/maintainability)
 
 Gendiff (generator of difference) is program that determines the difference between two data structures. 
 

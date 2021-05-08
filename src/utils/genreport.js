@@ -6,11 +6,8 @@ const genReport = (filepath1, filepath2) => {
 
   if (filesData) {
     const keys = Object.keys(filesData[0]).concat(Object.keys(filesData[1]));
-    const sortedKeys = _.uniq(keys).sort((a, b) => {
-      if (a > b) return 1;
-      if (a < b) return -1;
-      return 0;
-    });
+    const sortedKeys = _.uniq(keys)
+      .sort((a, b) => a.localeCompare(b));
     const result = [];
     sortedKeys.forEach((key) => {
       const hasProp1 = Object.prototype.hasOwnProperty.call(filesData[0], key);
