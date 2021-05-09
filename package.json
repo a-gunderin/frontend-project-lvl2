@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/a-gunderin/frontend-project-lvl2#readme",
   "type": "module",
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {},
+    "testRunner": "jest-circus/runner"
+  },
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
