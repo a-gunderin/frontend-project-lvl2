@@ -4,7 +4,8 @@
   "description": "[![Actions Status](https://github.com/a-gunderin/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/a-gunderin/frontend-project-lvl2/actions)",
   "main": "src/index.js",
   "scripts": {
-    "test": "npx jest --bail"
+    "test": "npx jest --bail",
+    "win-test": "node --experimental-vm-modules node_modules/jest/bin/jest --bail"
   },
   "repository": {
     "type": "git",
@@ -30,9 +31,12 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
+    "@jest/globals": "^26.6.2",
     "eslint": "^7.25.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "jest-circus": "^26.6.3",
+    "jest-cli": "^26.6.3"
   }
 }

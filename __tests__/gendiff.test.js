@@ -1,3 +1,4 @@
+import path from 'path';
 import genDiff from '../src/utils/gendiff.js';
 import getFilesData from '../src/utils/getfilesdata.js';
 import { fileURLToPath } from 'url';
