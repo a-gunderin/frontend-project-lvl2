@@ -1,5 +1,6 @@
 import { Command } from 'commander/esm.mjs';
-import genReport from './utils/genreport.js';
+import genDiff from './utils/gendiff.js';
+import parsing from './utils/parsers.js';
 
 const program = new Command();
 
@@ -9,7 +10,7 @@ program
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format [type]', 'output format')
   .action((filepath1, filepath2) => {
-    genReport(filepath1, filepath2);
+    genDiff(parsing(filepath1), parsing(filepath2));
   });
 
 export default program;
