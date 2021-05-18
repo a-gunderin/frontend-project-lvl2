@@ -8,7 +8,7 @@ const parsing = (filepath) => {
 
   try {
     const fileData = readFileSync(absolutePath, 'utf8');
-    if (format === '.json' || format === '.' || format === '') {
+    if (format === '.json') {
       return JSON.parse(fileData);
     }
     if (format === '.yml' || format === '.yaml') {

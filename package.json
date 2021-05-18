@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "test": "npx jest --bail",
-    "win-test": "node --experimental-vm-modules node_modules/jest/bin/jest --bail"
+    "win-test": "node --experimental-vm-modules node_modules/jest/bin/jest --bail",
+    "lint": "npx eslint .",
+    "lint-fix": "npx eslint --fix ."
   },
   "repository": {
     "type": "git",
