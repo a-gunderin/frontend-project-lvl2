@@ -1,30 +1,33 @@
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { readFileSync } from 'fs';
-import parsing from '../src/core/parsers.js';
-import genDiff from '../src/core/gendiff.js';
-import stylish from '../src/core/stylish.js';
+import genDiff from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
 const expectedFlat = readFileSync(getFixturePath('expectedFlat.txt'), 'utf8');
-const parsedJson1 = parsing(getFixturePath('file1.json'));
-const parsedJson2 = parsing(getFixturePath('file2.json'));
+const pathToFile1 = getFixturePath('file1.json');
+const pathToFile2 = getFixturePath('file2.json');
 test('Comparison of flat json files', () => {
-  expect(stylish(genDiff(parsedJson1, parsedJson2))).toBe(expectedFlat);
+  expect(genDiff(pathToFile1, pathToFile2)).toBe(expectedFlat);
 });
 
-const parsedYml1 = parsing(getFixturePath('file1.yml'));
-const parsedYml2 = parsing(getFixturePath('file2.yml'));
+const pathToFile3 = getFixturePath('file1.yml');
+const pathToFile4 = getFixturePath('file2.yml');
 test('Comparison of flat yml files', () => {
-  expect(stylish(genDiff(parsedYml1, parsedYml2))).toBe(expectedFlat);
+  expect(genDiff(pathToFile3, pathToFile4)).toBe(expectedFlat);
 });
 
 const expectedComplex = readFileSync(getFixturePath('expectedComplex.txt'), 'utf8');
-const parsedComplexJson1 = parsing(getFixturePath('fileComplex1.json'));
-const parsedComplexJson2 = parsing(getFixturePath('fileComplex2.json'));
+const pathToFile5 = getFixturePath('fileComplex1.json');
+const pathToFile6 = getFixturePath('fileComplex2.json');
 test('Comparison of complex json files', () => {
-  expect(stylish(genDiff(parsedComplexJson1, parsedComplexJson2))).toBe(expectedComplex);
+  expect(genDiff(pathToFile5, pathToFile6)).toBe(expectedComplex);
+});
+
+const expectedComplexPlain = readFileSync(getFixturePath('expectedComplexPlain.txt'), 'utf8');
+test('Comparison of complex json files with PLAIN formatter', () => {
+  expect(genDiff(pathToFile5, pathToFile6, 'plain')).toBe(expectedComplexPlain);
 });
