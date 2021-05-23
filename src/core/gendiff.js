@@ -26,17 +26,9 @@ const genDiff = (obj1, obj2) => {
         result[`+ ${key}`] = obj2[key];
       }
     } else if (hasKey1 && !hasKey2) {
-      if (value1IsObj) {
-        result[`- ${key}`] = genDiff(obj1[key], obj1[key]);
-      } else {
-        result[`- ${key}`] = obj1[key];
-      }
+      result[`- ${key}`] = value1IsObj ? genDiff(obj1[key], obj1[key]) : obj1[key];
     } else if (!hasKey1 && hasKey2) {
-      if (value2IsObj) {
-        result[`+ ${key}`] = genDiff(obj2[key], obj2[key]);
-      } else {
-        result[`+ ${key}`] = obj2[key];
-      }
+      result[`+ ${key}`] = value2IsObj ? genDiff(obj2[key], obj2[key]) : obj2[key];
     }
     return null;
   });
