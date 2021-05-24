@@ -6,8 +6,6 @@ const stylish = (obj, indentSize = 2) => {
   keys.forEach((key) => {
     if (valueIsObj(obj, key)) {
       result.push(`${' '.repeat(indentSize)}${key}: ${stylish(obj[key], indentSize + 4)}`);
-    } else if (obj[key] === '') {
-      result.push(`${' '.repeat(indentSize)}${key}:`);
     } else {
       const formattedValue = String(obj[key]).trim();
       result.push(`${' '.repeat(indentSize)}${key}: ${formattedValue}`);
