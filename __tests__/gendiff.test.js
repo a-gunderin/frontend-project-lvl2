@@ -31,3 +31,8 @@ const expectedComplexPlain = readFileSync(getFixturePath('expectedComplexPlain.t
 test('Comparison of complex json files with PLAIN formatter', () => {
   expect(genDiff(pathToFile5, pathToFile6, 'plain')).toBe(expectedComplexPlain);
 });
+
+const expectedComplexJSON = readFileSync(getFixturePath('expectedComplexJSON.txt'), 'utf8');
+test('Comparison of complex json files with JSON formatter', () => {
+  expect(genDiff(pathToFile5, pathToFile6, 'json')).toBe(expectedComplexJSON);
+});
