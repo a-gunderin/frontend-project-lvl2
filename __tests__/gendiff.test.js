@@ -27,6 +27,12 @@ test('Comparison of complex json files', () => {
   expect(genDiff(pathToFile5, pathToFile6)).toBe(expectedComplex);
 });
 
+const pathToFile7 = getFixturePath('fileComplex1.yml');
+const pathToFile8 = getFixturePath('fileComplex2.yml');
+test('Comparison of complex yml files', () => {
+  expect(genDiff(pathToFile7, pathToFile8)).toBe(expectedComplex);
+});
+
 const expectedComplexPlain = readFileSync(getFixturePath('expectedComplexPlain.txt'), 'utf8');
 test('Comparison of complex json files with PLAIN formatter', () => {
   expect(genDiff(pathToFile5, pathToFile6, 'plain')).toBe(expectedComplexPlain);
