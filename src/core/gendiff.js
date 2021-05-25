@@ -1,10 +1,10 @@
+import _ from 'lodash';
 import objHasKey from '../utils/objhaskey.js';
 import valueIsObj from '../utils/valueisobj.js';
 
 const genDiff = (obj1, obj2) => {
   const result = {};
-  const keys = Object.keys({ ...obj1, ...obj2 })
-    .sort((a, b) => a.localeCompare(b));
+  const keys = _.orderBy(Object.keys({ ...obj1, ...obj2 }));
   keys.forEach((key) => {
     const hasKey1 = objHasKey(obj1, key);
     const hasKey2 = objHasKey(obj2, key);
