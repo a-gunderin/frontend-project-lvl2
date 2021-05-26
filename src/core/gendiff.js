@@ -25,9 +25,9 @@ const genDiff = (obj1, obj2) => {
         result[`- ${key}`] = obj1[key];
         result[`+ ${key}`] = obj2[key];
       }
-    } else if (hasKey1 && !hasKey2) {
+    } else if (!hasKey2) {
       result[`- ${key}`] = value1IsObj ? genDiff(obj1[key], obj1[key]) : obj1[key];
-    } else if (!hasKey1 && hasKey2) {
+    } else if (!hasKey1) {
       result[`+ ${key}`] = value2IsObj ? genDiff(obj2[key], obj2[key]) : obj2[key];
     }
     return null;
