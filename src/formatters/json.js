@@ -1,18 +1,16 @@
 import valueIsObj from '../utils/valueisobj.js';
 
 const formatSpacedKeys = (obj) => {
-  const result = {};
   const keys = Object.keys(obj);
-  keys.forEach((key) => {
+  const result = keys.map((key) => {
     const valueIsObject = valueIsObj(obj, key);
     const keyIsSpaced = key.startsWith('  ');
     if (keyIsSpaced) {
-      result[key.substring(2)] = valueIsObject ? formatSpacedKeys(obj[key]) : obj[key];
-    } else {
-      result[key] = valueIsObject ? formatSpacedKeys(obj[key]) : obj[key];
+      return { [key.substring(2)]: valueIsObject ? formatSpacedKeys(obj[key]) : obj[key] };
     }
+    return { [key]: valueIsObject ? formatSpacedKeys(obj[key]) : obj[key] };
   });
-  return result;
+  return Object.assign({}, ...result);
 };
 
 const jsonFormatter = (obj) => {
