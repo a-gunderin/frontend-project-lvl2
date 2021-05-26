@@ -3,36 +3,31 @@ import objHasKey from '../utils/objhaskey.js';
 import valueIsObj from '../utils/valueisobj.js';
 
 const genDiff = (obj1, obj2) => {
-  const result = {};
   const keys = _.orderBy(Object.keys({ ...obj1, ...obj2 }));
-  keys.forEach((key) => {
+  const result = keys.map((key) => {
     const hasKey1 = objHasKey(obj1, key);
     const hasKey2 = objHasKey(obj2, key);
     const value1IsObj = valueIsObj(obj1, key);
     const value2IsObj = valueIsObj(obj2, key);
     if (hasKey1 && hasKey2) {
       if (value1IsObj && value2IsObj) {
-        result[`  ${key}`] = genDiff(obj1[key], obj2[key]);
-      } else if (value1IsObj && !value2IsObj) {
-        result[`- ${key}`] = genDiff(obj1[key], obj1[key]);
-        result[`+ ${key}`] = obj2[key];
-      } else if (!value1IsObj && value2IsObj) {
-        result[`- ${key}`] = obj1[key];
-        result[`+ ${key}`] = genDiff(obj2[key], obj2[key]);
-      } else if (obj1[key] === obj2[key]) {
-        result[`  ${key}`] = obj1[key];
-      } else {
-        result[`- ${key}`] = obj1[key];
-        result[`+ ${key}`] = obj2[key];
+        return { [`  ${key}`]: genDiff(obj1[key], obj2[key]) };
+      } if (value1IsObj && !value2IsObj) {
+        return { [`- ${key}`]: genDiff(obj1[key], obj1[key]), [`+ ${key}`]: obj2[key] };
+      } if (!value1IsObj && value2IsObj) {
+        return { [`- ${key}`]: obj1[key], [`+ ${key}`]: genDiff(obj2[key], obj2[key]) };
+      } if (obj1[key] === obj2[key]) {
+        return { [`  ${key}`]: obj1[key] };
       }
-    } else if (!hasKey2) {
-      result[`- ${key}`] = value1IsObj ? genDiff(obj1[key], obj1[key]) : obj1[key];
-    } else if (!hasKey1) {
-      result[`+ ${key}`] = value2IsObj ? genDiff(obj2[key], obj2[key]) : obj2[key];
+      return { [`- ${key}`]: obj1[key], [`+ ${key}`]: obj2[key] };
+    } if (!hasKey2) {
+      return { [`- ${key}`]: value1IsObj ? genDiff(obj1[key], obj1[key]) : obj1[key] };
+    } if (!hasKey1) {
+      return { [`+ ${key}`]: value2IsObj ? genDiff(obj2[key], obj2[key]) : obj2[key] };
     }
     return null;
   });
-  return result;
+  return Object.assign({}, ...result);
 };
 
 export default genDiff;
