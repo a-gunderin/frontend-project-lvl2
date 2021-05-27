@@ -13,43 +13,57 @@ Utility features:
 
 ## Requirements
 
-I am developing this program using v14.14.0 of Node.
-If you face with some issue while using other version of node just try to use v14.14.0.
+I've developed this program using v14.14.0 of Node.
 
-## Setup for Linux / macOS systems
+If you face with some issues while using other versions of node just try to use v14.14.0.
 
+## For Linux / macOS systems
+
+To install the program just run inside cloned folder
 ```sh
 $ make install
 ```
 
-## Setup for Windows
+Uninstall program
+```sh
+$ make uninstall
+```
 
+Get help information
+```sh
+$ gendiff -h
+```
+
+Compare two files
+```sh
+$ gendiff pathToFile1.json pathToFile2.json
+```
+
+Compare two files using other formats
+```sh
+$ gendiff -f plain pathToFile1.json pathToFile2.json
+```
+```sh
+$ gendiff -f json pathToFile1.json pathToFile2.json
+```
+
+Run tests
+```sh
+$ make test
+```
+
+## For Windows PCs
+
+To install the program just run inside cloned folder
 ```sh
 $ npm ci
 ...
 $ npm link
 ```
 
-## Get help information on Linux / macOS
-
+Run tests
 ```sh
-$ gendiff -h
+$ npm run win-test
 ```
 
-## Get help information on Windows
-
-```sh
-$ ../frontend-project-lvl2> node ./bin/gendiff -h
-```
-
-### Compare two files on Linux / macOS
-
-```sh
-$ gendiff pathToFile1.json pathToFile2.json
-```
-
-### Compare two files on Windows
-
-```sh
-$ ../frontend-project-lvl2> node ./bin/gendiff pathToFile1.json pathToFile2.json
-```
+All other actions are the same as for Linux / MacOS systems.
