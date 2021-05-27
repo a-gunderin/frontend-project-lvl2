@@ -12,28 +12,27 @@ const formattedValue = (obj, key) => {
 };
 
 const plain = (obj) => {
-  const result = [];
   const iter = (objX, complexKey = '') => {
     const keys = Object.keys(objX);
-    keys.forEach((key) => {
+    return keys.reduce((accumulatedArr, key) => {
       const clearKey = key.substring(2);
       const plusKey = `+ ${clearKey}`;
       const minusKey = `- ${clearKey}`;
       const fullPath = `${complexKey}${clearKey}`;
       const startPhrase = `Property '${fullPath}' was`;
       if (key.startsWith('  ') && valueIsObj(objX, key)) {
-        iter(objX[key], `${fullPath}.`);
-      } else if (key.startsWith('- ') && keys.includes(plusKey)) {
-        result.push(`${startPhrase} updated. From ${formattedValue(objX, minusKey)} to ${formattedValue(objX, plusKey)}`);
-      } else if (key.startsWith('- ') && !keys.includes(plusKey)) {
-        result.push(`${startPhrase} removed`);
-      } else if (key.startsWith('+ ') && !keys.includes(minusKey)) {
-        result.push(`${startPhrase} added with value: ${formattedValue(objX, plusKey)}`);
+        return [...accumulatedArr, iter(objX[key], `${fullPath}.`)];
+      } if (key.startsWith('- ') && keys.includes(plusKey)) {
+        return [...accumulatedArr, `${startPhrase} updated. From ${formattedValue(objX, minusKey)} to ${formattedValue(objX, plusKey)}`];
+      } if (key.startsWith('- ') && !keys.includes(plusKey)) {
+        return [...accumulatedArr, `${startPhrase} removed`];
+      } if (key.startsWith('+ ') && !keys.includes(minusKey)) {
+        return [...accumulatedArr, `${startPhrase} added with value: ${formattedValue(objX, plusKey)}`];
       }
-    });
+      return accumulatedArr;
+    }, []);
   };
-  iter(obj);
-  return result.join('\n');
+  return iter(obj).flat(Infinity).join('\n');
 };
 
 export default plain;
