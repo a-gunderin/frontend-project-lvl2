@@ -18,16 +18,13 @@ const genDiff = (obj1, obj2) => {
     if (value1IsObj && value2IsObj) {
       return { [`  ${key}`]: genDiff(obj1[key], obj2[key]) };
     }
-    if (value1IsObj && !value2IsObj) {
-      return { [`- ${key}`]: genDiff(obj1[key], obj1[key]), [`+ ${key}`]: obj2[key] };
+    if (!_.isEqual(obj1[key], obj2[key])) {
+      return {
+        [`- ${key}`]: value1IsObj ? genDiff(obj1[key], obj1[key]) : obj1[key],
+        [`+ ${key}`]: value2IsObj ? genDiff(obj2[key], obj2[key]) : obj2[key],
+      };
     }
-    if (!value1IsObj && value2IsObj) {
-      return { [`- ${key}`]: obj1[key], [`+ ${key}`]: genDiff(obj2[key], obj2[key]) };
-    }
-    if (obj1[key] === obj2[key]) {
-      return { [`  ${key}`]: obj1[key] };
-    }
-    return { [`- ${key}`]: obj1[key], [`+ ${key}`]: obj2[key] };
+    return { [`  ${key}`]: obj1[key] };
   });
   return Object.assign({}, ...result);
 };
