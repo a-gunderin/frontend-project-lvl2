@@ -52,6 +52,8 @@ Run tests
 $ make test
 ```
 
+[![asciicast](https://asciinema.org/a/iWPXwNXAshUDceRwWrDGX4Mqr.svg)](https://asciinema.org/a/iWPXwNXAshUDceRwWrDGX4Mqr)
+
 ## For Windows PCs
 
 To install the program just run inside cloned folder
@@ -66,4 +68,4 @@ Run tests
 $ npm run win-test
 ```
 
-All other actions are the same as for Linux / MacOS systems.
+All other actions are the same as for Linux / macOS systems.
