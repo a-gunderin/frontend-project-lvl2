@@ -1,18 +1,16 @@
 import valueIsObj from '../utils/valueisobj.js';
 
 const stylish = (obj, indentSize = 2) => {
-  const result = ['{'];
   const keys = Object.keys(obj);
-  keys.forEach((key) => {
+  const result = keys.reduce((accumArr, key) => {
     if (valueIsObj(obj, key)) {
-      result.push(`${' '.repeat(indentSize)}${key}: ${stylish(obj[key], indentSize + 4)}`);
+      return [...accumArr, `${' '.repeat(indentSize)}${key}: ${stylish(obj[key], indentSize + 4)}`];
     } else {
       const formattedValue = String(obj[key]).trim();
-      result.push(`${' '.repeat(indentSize)}${key}: ${formattedValue}`);
+      return [...accumArr, `${' '.repeat(indentSize)}${key}: ${formattedValue}`];
     }
-  });
-  result.push(`${' '.repeat(indentSize - 2)}}`);
-  return result.join('\n');
+  }, ['{']);
+  return [...result, `${' '.repeat(indentSize - 2)}}`].join('\n');
 };
 
 export default stylish;
