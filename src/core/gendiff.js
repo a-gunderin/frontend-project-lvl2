@@ -9,23 +9,25 @@ const genDiff = (obj1, obj2) => {
     const hasKey2 = objHasKey(obj2, key);
     const value1IsObj = valueIsObj(obj1, key);
     const value2IsObj = valueIsObj(obj2, key);
-    if (hasKey1 && hasKey2) {
-      if (value1IsObj && value2IsObj) {
-        return { [`  ${key}`]: genDiff(obj1[key], obj2[key]) };
-      } if (value1IsObj && !value2IsObj) {
-        return { [`- ${key}`]: genDiff(obj1[key], obj1[key]), [`+ ${key}`]: obj2[key] };
-      } if (!value1IsObj && value2IsObj) {
-        return { [`- ${key}`]: obj1[key], [`+ ${key}`]: genDiff(obj2[key], obj2[key]) };
-      } if (obj1[key] === obj2[key]) {
-        return { [`  ${key}`]: obj1[key] };
-      }
-      return { [`- ${key}`]: obj1[key], [`+ ${key}`]: obj2[key] };
-    } if (!hasKey2) {
+    if (!hasKey2) {
       return { [`- ${key}`]: value1IsObj ? genDiff(obj1[key], obj1[key]) : obj1[key] };
-    } if (!hasKey1) {
+    }
+    if (!hasKey1) {
       return { [`+ ${key}`]: value2IsObj ? genDiff(obj2[key], obj2[key]) : obj2[key] };
     }
-    return null;
+    if (value1IsObj && value2IsObj) {
+      return { [`  ${key}`]: genDiff(obj1[key], obj2[key]) };
+    }
+    if (value1IsObj && !value2IsObj) {
+      return { [`- ${key}`]: genDiff(obj1[key], obj1[key]), [`+ ${key}`]: obj2[key] };
+    }
+    if (!value1IsObj && value2IsObj) {
+      return { [`- ${key}`]: obj1[key], [`+ ${key}`]: genDiff(obj2[key], obj2[key]) };
+    }
+    if (obj1[key] === obj2[key]) {
+      return { [`  ${key}`]: obj1[key] };
+    }
+    return { [`- ${key}`]: obj1[key], [`+ ${key}`]: obj2[key] };
   });
   return Object.assign({}, ...result);
 };
